@@ -22,12 +22,14 @@ sudo docker image pull oraclelinux:7-slim
 #docker build -t oracle/jdk:11 .
 
 # Build Oracle Server JRE8
-mv fmw_12.2.1.3.0_wls_Disk1_1of1.zip /home/centos/docker-images/OracleJava/java-8
+#mv fmw_12.2.1.3.0_wls_Disk1_1of1.zip /home/centos/docker-images/OracleJava/java-8
+mv server-jre-8u241-linux-x64.tar.gz /home/centos/docker-images/OracleJava/java-8
 cd /home/centos/docker-images/OracleJava/java-8
 sudo sh build.sh
 
 # Build Weblogic Server base image
 cd /home/centos/docker-images/OracleWebLogic/dockerfiles
+mv /home/centos/fmw_12.2.1.3.0_wls_Disk1_1of1.zip /home/centos/docker-images/OracleWebLogic/dockerfiles/12.2.1.3/
 sh buildDockerImage.sh -v 12.2.1.3 -g
 
 # Build the WebLogic Server 12cR2 with MedRec sample domain
