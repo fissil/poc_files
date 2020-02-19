@@ -11,9 +11,6 @@ wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download
 # Download Server JRE
 wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1tX6FRFw2S6MF_v-kRurex_qbmGjEN7Xx' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1tX6FRFw2S6MF_v-kRurex_qbmGjEN7Xx" -O server-jre-8u241-linux-x64.tar.gz && rm -rf /tmp/cookies.txt
 
-#Download WebLogic Server 12cR2 with MedRec sample domain
-wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1DAszmWgS8vKs6FyPxzVDo2jL_kfPooOG' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1DAszmWgS8vKs6FyPxzVDo2jL_kfPooOG" -O fmw_12.2.1.3.0_wls_supplemental_quick_Disk1_1of1.zip && rm -rf /tmp/cookies.txt
-
 # Pull oracle image Linux
 sudo docker image pull oraclelinux:7-slim
 
@@ -35,8 +32,9 @@ sh buildDockerImage.sh -v 12.2.1.3 -g
 # Build the WebLogic Server 12cR2 with MedRec sample domain
 cd /home/centos/docker-images/OracleWebLogic/samples
 cp -r 12212-medrec 12213-medrec
-mv /home/centos/fmw_12.2.1.3.0_wls_supplemental_quick_Disk1_1of1.zip 12213-medrec/
 cd 12213-medrec
+#Download WebLogic Server 12cR2 with MedRec sample domain
+wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1QiEUE-aIVs9hnHAwvAp7qZERtDjQDq9Q' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1QiEUE-aIVs9hnHAwvAp7qZERtDjQDq9Q" -O fmw_12.2.1.3.0_wls_supplemental_quick_Disk1_1of1.zip && rm -rf /tmp/cookies.txt
 sed -i 's/weblogic:12.2.1.2-developer/weblogic:12.2.1.3-generic/g' Dockerfile
 sed -i 's/fmw_12.2.1.2.0_wls_supplemental_quick_Disk1_1of1.zip/fmw_12.2.1.3.0_wls_supplemental_quick_Disk1_1of1.zip/g' Dockerfile
 sed -i 's/fmw_12.2.1.2.0_wls_supplemental_quick.jar/fmw_12.2.1.3.0_wls_supplemental_quick.jar/g' Dockerfile
