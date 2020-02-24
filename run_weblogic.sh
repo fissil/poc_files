@@ -1,4 +1,5 @@
 # run the application if needed
 docker run -ti -p 7011:7011 12213-medrec
 #http://localhost:7011/medrec
-docker exec -it 5aac0440c9b0 bash
+weblogic_image = docker images 12213-medrec --format "{{.ID}}"
+docker exec -it $weblogic_image bash
