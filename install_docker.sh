@@ -48,7 +48,7 @@ sudo mkswap /swapfile
 sudo swapon /swapfile
 
 # build medrec application
-sudo docker build -t /home/cliqruser/docker-images/OracleWebLogic/samples/12213-medrec/12213-medrec .
+sudo docker build -t 12213-medrec .
 
 
 # run the application if needed
