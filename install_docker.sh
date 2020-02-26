@@ -5,6 +5,7 @@ sudo yum install git -y
 sudo curl -fsSL https://get.docker.com/ | sh
 sudo systemctl start docker
 sudo systemctl enable docker
+sudo usermode -aG docker cliqruser
 cd /home/cliqruser
 sudo git clone https://github.com/oracle/docker-images.git
 
@@ -24,18 +25,18 @@ sudo docker image pull oraclelinux:7-slim
 # Build Oracle Server JRE8
 #mv fmw_12.2.1.3.0_wls_Disk1_1of1.zip /home/cliqruser/docker-images/OracleJava/java-8
 sudo mv server-jre-8u241-linux-x64.tar.gz /home/cliqruser/docker-images/OracleJava/java-8
-sudo cd /home/cliqruser/docker-images/OracleJava/java-8
+cd /home/cliqruser/docker-images/OracleJava/java-8
 sudo sh build.sh
 
 # Build Weblogic Server base image
-sudo cd /home/cliqruser/docker-images/OracleWebLogic/dockerfiles
+cd /home/cliqruser/docker-images/OracleWebLogic/dockerfiles
 sudo mv /home/cliqruser/fmw_12.2.1.3.0_wls_Disk1_1of1.zip /home/cliqruser/docker-images/OracleWebLogic/dockerfiles/12.2.1.3/
 sudo sh buildDockerImage.sh -v 12.2.1.3 -g
 
 # Build the WebLogic Server 12cR2 with MedRec sample domain
-sudo cd /home/cliqruser/docker-images/OracleWebLogic/samples
+cd /home/cliqruser/docker-images/OracleWebLogic/samples
 sudo cp -r 12212-medrec 12213-medrec
-sudo cd 12213-medrec
+cd 12213-medrec
 #Download WebLogic Server 12cR2 with MedRec sample domain
 sudo wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1QiEUE-aIVs9hnHAwvAp7qZERtDjQDq9Q' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1QiEUE-aIVs9hnHAwvAp7qZERtDjQDq9Q" -O fmw_12.2.1.3.0_wls_supplemental_quick_Disk1_1of1.zip && rm -rf /tmp/cookies.txt
 sudo sed -i 's/weblogic:12.2.1.2-developer/weblogic:12.2.1.3-generic/g' Dockerfile
