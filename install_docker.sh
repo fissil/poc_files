@@ -35,20 +35,20 @@ sudo sh buildDockerImage.sh -v 12.2.1.3 -g
 
 # Build the WebLogic Server 12cR2 with MedRec sample domain
 cd /home/cliqruser/docker-images/OracleWebLogic/samples
-sudo cp -r 12212-medrec 12213-medrec
-cd 12213-medrec
+sudo cp -r /home/cliqruser/docker-images/OracleWebLogic/samples/12212-medrec /home/cliqruser/docker-images/OracleWebLogic/samples/12213-medrec
+cd /home/cliqruser/docker-images/OracleWebLogic/samples/12213-medrec
 #Download WebLogic Server 12cR2 with MedRec sample domain
 sudo wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1QiEUE-aIVs9hnHAwvAp7qZERtDjQDq9Q' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1QiEUE-aIVs9hnHAwvAp7qZERtDjQDq9Q" -O fmw_12.2.1.3.0_wls_supplemental_quick_Disk1_1of1.zip && rm -rf /tmp/cookies.txt
-sudo sed -i 's/weblogic:12.2.1.2-developer/weblogic:12.2.1.3-generic/g' Dockerfile
-sudo sed -i 's/fmw_12.2.1.2.0_wls_supplemental_quick_Disk1_1of1.zip/fmw_12.2.1.3.0_wls_supplemental_quick_Disk1_1of1.zip/g' Dockerfile
-sudo sed -i 's/fmw_12.2.1.2.0_wls_supplemental_quick.jar/fmw_12.2.1.3.0_wls_supplemental_quick.jar/g' Dockerfile
+sudo sed -i 's/weblogic:12.2.1.2-developer/weblogic:12.2.1.3-generic/g' /home/cliqruser/docker-images/OracleWebLogic/samples/12213-medrec/Dockerfile
+sudo sed -i 's/fmw_12.2.1.2.0_wls_supplemental_quick_Disk1_1of1.zip/fmw_12.2.1.3.0_wls_supplemental_quick_Disk1_1of1.zip/g' /home/cliqruser/docker-images/OracleWebLogic/samples/12213-medrec/Dockerfile
+sudo sed -i 's/fmw_12.2.1.2.0_wls_supplemental_quick.jar/fmw_12.2.1.3.0_wls_supplemental_quick.jar/g' /home/cliqruser/docker-images/OracleWebLogic/samples/12213-medrec/Dockerfile
 # creating SWAP of 2GB to satisfy the requirements
 sudo dd if=/dev/zero of=/swapfile bs=1024 count=2048k
 sudo mkswap /swapfile
 sudo swapon /swapfile
 
 # build medrec application
-sudo docker build -t 12213-medrec .
+sudo docker build -t /home/cliqruser/docker-images/OracleWebLogic/samples/12213-medrec/12213-medrec .
 
 
 # run the application if needed
