@@ -49,7 +49,7 @@ sudo swapon /swapfile
 
 # build medrec application
 sudo docker build -t 12213-medrec .
-sudo docker run -ti -p 7011:7011 12213-medrec
+sudo docker run -ti -d -p 7011:7011 12213-medrec
 
 # run the application if needed
 #docker run -ti -p 7011:7011 12213-medrec
